@@ -301,3 +301,38 @@ console.log(generatorSaga.next().value);//1 LO HACE EL WORKER
 console.log(generatorSaga.next().value);//2 LO HACE EL WORKER
 console.log(generatorSaga.next().value);//3 LO HACE EL WORKER
 console.log(generatorSaga.next().value);//4 LO HACE EL WATCHER
+
+/**
+ * CallBack
+ */
+
+let fsuma= function suma (a:number, b:number){
+    return a+b;
+}
+
+let fresta= function resta (a:number, b:number){
+    return a-b;
+}
+
+let fmultiplica= function multiplica (a:number, b:number, c:number){
+    return a*b*c;
+}
+
+function opera(x:number,y:number, funcion:(a:number,b:number)=>number){
+    return funcion(x,y);
+}
+
+opera(1,2,fsuma);
+opera(1,2,fresta);
+
+async function asincrona() {
+    let suma:number=0
+    for (let i=0;i<1000;i++){
+        suma+=i;
+    }
+
+   return suma;
+}
+
+asincrona().then((data:number)=>{console.log(`El resultado es ${data}`)})
+
