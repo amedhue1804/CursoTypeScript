@@ -4,9 +4,11 @@
   "description": "Primeros pasos en TypeScript",
   "main": "src/index.ts",
   "scripts": {
-    "tsnode": "ts-node src/index.ts",
+    "tsnode": "cd src && ts-node index.ts",
     "start": "nodemon",
-    "transpilation": "tsc"
+    "transpilation": "tsc",
+    "build": "webpack",
+    "start-web": "webpack serve"
   },
   "keywords": [
     "TypeScript"
@@ -14,9 +16,15 @@
   "author": "Amedhue1804",
   "license": "ISC",
   "devDependencies": {
-    "@types/node": "^22.5.5",
+    "@types/node": "^22.7.5",
+    "install": "^0.13.0",
     "nodemon": "^3.1.7",
+    "npm": "^10.9.0",
+    "ts-loader": "^9.5.1",
     "ts-node": "^10.9.2",
-    "typescript": "^5.6.2"
+    "typescript": "^5.6.3",
+    "webpack": "^5.95.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.1.0"
   }
 }

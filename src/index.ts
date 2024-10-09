@@ -4,14 +4,12 @@ console.log("Hola Mundo");
 
 var nombre:string= "Adrian";
 let apellido:string="Medina";
-const PI:number =3.1415;
 
 console.log("Hola" + "Mundo");
 console.log(nombre+apellido);
 console.log(nombre,apellido);
 console.log(`Hola${nombre}${apellido}`);
 
-let a:string= "Wanillo", b:string="Kokunero";
 
 //Arrays de Datos
 let alumnos:string[]=["Wanillo","Kokunero","Adrian"];
@@ -64,7 +62,6 @@ type Admin = {
     id: number;
 }&Empleado;
 
-let empleadoDani:Admin = {nombre: "Dani", edad: 24, sueldo: 1500,id:1234}
 
 console.log(tarea1.estado=="E"?`La tarea ${tarea1.nombre} se encuentra en ejecucion`:'aun no se ha ejecutado');
 
@@ -238,9 +235,6 @@ const obtenerSalario= (empleado:Empleado2, cobrar: ()=> string )=>{
     }
 }
 
-const cobrarempleado = (empleado:Empleado2) => {
-    console.log(`${empleado.nombre} cobra su salario`);
-}
 
 obtenerSalario(empleadoMartin, ()=> `Cobrar Martin`);
 
@@ -253,7 +247,7 @@ console.log("Compleatado")
 
 ejemploAsync().then((respuesta)=> {
     console.log("Respuesta", respuesta)
-}).catch((error)=>{
+}).catch(()=>{
     
 }).finally
 
@@ -314,9 +308,6 @@ let fresta= function resta (a:number, b:number){
     return a-b;
 }
 
-let fmultiplica= function multiplica (a:number, b:number, c:number){
-    return a*b*c;
-}
 
 function opera(x:number,y:number, funcion:(a:number,b:number)=>number){
     return funcion(x,y);
@@ -335,4 +326,39 @@ async function asincrona() {
 }
 
 asincrona().then((data:number)=>{console.log(`El resultado es ${data}`)})
+
+//ASYNC GENERADORA
+function* fgenerador2():Generator<string>{
+    yield "Hola"
+    yield "Mundo"
+    yield "IES"
+}
+
+let llamadafgen2 = fgenerador2();
+let str= llamadafgen2.next();
+type WEBPage={
+    Name:string,
+    Domain:string,
+    Description: string
+}
+
+while(str.done ==false){
+console.log(str.value);
+}
+
+async function* obtenerDatosweb():AsyncGenerator<WEBPage> {
+    let peticion = await fetch("https://haveibeenpwned.com/API/v2/breaches");
+    let datos: WEBPage[] = await peticion.json() as WEBPage[];
+    
+    for(let index=0; index<datos.length; index++){
+    yield datos [index] 
+    }
+}
+
+let datosWebPage= obtenerDatosweb();
+
+datosWebPage.next().then(({value}) => {console.log(`${value.Name}`)}) ;
+datosWebPage.next().then(({value}) => {console.log(`${value.Name}`)}) ;
+
+
 
