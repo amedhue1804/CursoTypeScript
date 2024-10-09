@@ -299,35 +299,25 @@ type WEBPage={
     Description: string
 }
 
-while(str.done ==false){
-console.log(str.value);
+
+// Definición de la clase Tarea (esto es esencial para que el array de tareas funcione)
+class Tarea {
+    constructor(
+        public id: number,
+        public descripcion: string,
+        public completada: boolean
+    ) {}
 }
-
-async function* obtenerDatosweb():AsyncGenerator<WEBPage> {
-    let peticion = await fetch("https://haveibeenpwned.com/API/v2/breaches");
-    let datos: WEBPage[] = await peticion.json() as WEBPage[];
-    
-    for(let index=0; index<datos.length; index++){
-    yield datos [index] 
-    }
-}
-
-let datosWebPage= obtenerDatosweb();
-
-datosWebPage.next().then(({value}) => {console.log(`${value.Name}`)}) ;
-datosWebPage.next().then(({value}) => {console.log(`${value.Name}`)}) ;
-
-//Ejercicio 2 P1.1
 
 /**
  * Función que almacena un conjunto de datos en el almacenamiento del navegador, 
  * ya sea en el Session Storage o en el Local Storage, dependiendo del tipo especificado.
  * 
  * @param type Indica el tipo de almacenamiento ("session" o "local")
- * @param key Clave para identificar los datos almacenados
+ * @param key Clave para identificar los datos almacenados  
  * @param data Array que contiene las tareas a guardar
  */
-function activity2(type: string = "Session Storage", key: string, data: Tarea[]) {
+function Ejercicio_2(type: string = "session", key: string, data: Tarea[]) {
     
     // Si el tipo es "session", almacenamos los datos en el Session Storage
     if (type === "session") {
@@ -340,3 +330,47 @@ function activity2(type: string = "Session Storage", key: string, data: Tarea[])
         console.log("Los datos se han guardado en Local Storage");
     }
 }
+
+// Definimos un array de tareas como ejemplo
+const tareas: Tarea[] = [
+    new Tarea(1, "Terminar el proyecto de TypeScript", false),
+    new Tarea(2, "Estudiar para el examen", true),
+    new Tarea(3, "Comprar materiales para la clase", false)
+];
+
+// Ejecucion 1: Guardar los datos en Session Storage
+Ejercicio_2("session", "datos", tareas);
+
+// Ejecucion 2: Guardar los mismos datos en Local Storage
+Ejercicio_2("local", "datos", tareas);
+
+// Función para recuperar datos del almacenamiento
+function recuperarDeStorage(type: string = "session", key: string): Tarea[] | null {
+    let jsonData: string | null;
+
+    // Recuperamos datos según el tipo especificado
+    if (type === "session") {
+        jsonData = sessionStorage.getItem(key);
+    } else if (type === "local") {
+        jsonData = localStorage.getItem(key);
+    } else {
+        console.error("El tipo debe ser 'session' o 'local'.");
+        return null; // Retornamos null si el tipo es inválido
+    }
+
+    // Verificamos si hay datos y los convertimos de JSON a objeto
+    if (jsonData) {
+        return JSON.parse(jsonData) as Tarea[]; // Convertimos el string JSON a un array de Tarea
+    }
+
+    console.log("No se encontraron datos en el almacenamiento.");
+    return null; // Retornamos null si no hay datos
+}
+
+// Recuperar datos de Session Storage
+const tareasDesdeSession = recuperarDeStorage("session", "datos");
+console.log("Tareas recuperadas de Session Storage:", tareasDesdeSession);
+
+// Recuperar datos de Local Storage
+const tareasDesdeLocal = recuperarDeStorage("local", "datos");
+console.log("Tareas recuperadas de Local Storage:", tareasDesdeLocal);
