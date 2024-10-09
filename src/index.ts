@@ -45,49 +45,6 @@ interface Tarea{
     prioridad:number,
     estado:EstadoTarea
 }
-
-let tarea1:Tarea = {nombre:"Tarea1",prioridad:2,estado:EstadoTarea.Terminado}
-
-type Empleado = {
-    nombre: string;
-    edad: number;
-    sueldo: number;
-}
-
-let empleadoAdri: Empleado = { nombre: "Adrian", edad: 24, sueldo: 1500 };
-
-console.log(empleadoAdri.edad);
-
-type Admin = {
-    id: number;
-}&Empleado;
-
-
-console.log(tarea1.estado=="E"?`La tarea ${tarea1.nombre} se encuentra en ejecucion`:'aun no se ha ejecutado');
-
-//IF-ELSE
-
-if(tarea1.estado=="P"){
-
-}else if(tarea1.estado=="E"){
-
-}else{
-
-}
-
-//Switch
-
-switch(tarea1.estado){
-    case "P":
-        console.log("Tarea en proceso")
-        break;
-    case "E":
-            console.log("Tarea en proceso")
-        break;
-    default:
-        console.log("Tarea en proceso")
-}
-
 try{
     let numero1:number=1;
     console.log(numero1.toString)
@@ -360,5 +317,26 @@ let datosWebPage= obtenerDatosweb();
 datosWebPage.next().then(({value}) => {console.log(`${value.Name}`)}) ;
 datosWebPage.next().then(({value}) => {console.log(`${value.Name}`)}) ;
 
+//Ejercicio 2 P1.1
 
-
+/**
+ * Función que almacena un conjunto de datos en el almacenamiento del navegador, 
+ * ya sea en el Session Storage o en el Local Storage, dependiendo del tipo especificado.
+ * 
+ * @param type Indica el tipo de almacenamiento ("session" o "local")
+ * @param key Clave para identificar los datos almacenados
+ * @param data Array que contiene las tareas a guardar
+ */
+function activity2(type: string = "Session Storage", key: string, data: Tarea[]) {
+    
+    // Si el tipo es "session", almacenamos los datos en el Session Storage
+    if (type === "session") {
+        sessionStorage.setItem(key, JSON.stringify(data));
+        console.log("Los datos se han guardado en Session Storage");
+    
+    // Si el tipo es "local", los guardamos en el Local Storage
+    } else if (type === "local") {
+        localStorage.setItem(key, JSON.stringify(data));
+        console.log("Los datos se han guardado en Local Storage");
+    }
+}
