@@ -367,10 +367,11 @@ function recuperarDeStorage(type: string = "session", key: string): Tarea[] | nu
     return null; // Retornamos null si no hay datos
 }
 
-// Recuperar datos de Session Storage
+
+// Recuperar datos de Session Storage y mostrarlos por consola
 const tareasDesdeSession = recuperarDeStorage("session", "datos");
 console.log("Tareas recuperadas de Session Storage:", tareasDesdeSession);
 
-// Recuperar datos de Local Storage
+// Recuperar datos de Local Storage y mostrarlos por consola
 const tareasDesdeLocal = recuperarDeStorage("local", "datos");
 console.log("Tareas recuperadas de Local Storage:", tareasDesdeLocal);
