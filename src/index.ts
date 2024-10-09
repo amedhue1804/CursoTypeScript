@@ -430,15 +430,15 @@ borrarDeStorage("local", "datos");   // Eliminar del Local Storage
 //Ejericio 7
 
 //a. Crear la cookie "nombre" que expira en 7 días y es accesible desde el path "/"
-Cookies.set('nombre', 'TuNombre', { expires: 7, path: '/' });
+Cookies.set('nombre', 'Adrian', { expires: 7, path: '/' });
 console.log('Cookie "nombre" creada');
 
 // Crear la cookie "apellidos" que expira en 2 días
-Cookies.set('apellidos', 'TuApellido', { expires: 2 });
+Cookies.set('apellidos', 'Medina', { expires: 2 });
 console.log('Cookie "apellidos" creada');
 
 // Crear la cookie "email" que expira en 4 días
-Cookies.set('email', 'tuemail@ejemplo.com', { expires: 4 });
+Cookies.set('email', 'adrianmedina@gmail.com', { expires: 4 });
 console.log('Cookie "email" creada');
 
 // b. Recuperar las cookies y mostrarlas en la consola
@@ -446,7 +446,7 @@ const nombre = Cookies.get('nombre');
 const apellidos = Cookies.get('apellidos');
 const email = Cookies.get('email');
 
-console.log('Cookie "nombre":', nomb);
+console.log('Cookie "nombre":', nombre);
 console.log('Cookie "apellidos":', apellidos);
 console.log('Cookie "email":', email);
 
