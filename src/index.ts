@@ -1,14 +1,15 @@
 import { Console, error, log } from "console";
+import Cookies from "js-cookie";
 
 console.log("Hola Mundo");
 
-var nombre:string= "Adrian";
+var nomb:string= "Adrian";
 let apellido:string="Medina";
 
 console.log("Hola" + "Mundo");
-console.log(nombre+apellido);
-console.log(nombre,apellido);
-console.log(`Hola${nombre}${apellido}`);
+console.log(nomb+apellido);
+console.log(nomb,apellido);
+console.log(`Hola${nomb}${apellido}`);
 
 
 //Arrays de Datos
@@ -330,6 +331,32 @@ function Ejercicio_2(type: string = "session", key: string, data: Tarea[]) {
         console.log("Los datos se han guardado en Local Storage");
     }
 }
+//Ejercicio 5
+// Simulación de sessionStorage y localStorage en Node.js
+class Storage {
+    private store: { [key: string]: string } = {};
+
+    setItem(key: string, value: string) {
+        this.store[key] = value;
+    }
+
+    getItem(key: string): string | null {
+        return this.store[key] || null;
+    }
+
+    removeItem(key: string) {
+        delete this.store[key];
+    }
+
+    clear() {
+        this.store = {};
+    }
+}
+
+// Crear instancias simuladas de sessionStorage y localStorage
+const sessionStorage = new Storage();
+const localStorage = new Storage();
+
 
 // Definimos un array de tareas como ejemplo
 const tareas: Tarea[] = [
@@ -375,3 +402,61 @@ console.log("Tareas recuperadas de Session Storage:", tareasDesdeSession);
 // Recuperar datos de Local Storage y mostrarlos por consola
 const tareasDesdeLocal = recuperarDeStorage("local", "datos");
 console.log("Tareas recuperadas de Local Storage:", tareasDesdeLocal);
+
+//Ejercicio6
+/**
+ * Función que elimina un dato almacenado en Session Storage o Local Storage
+ * según el tipo especificado y la clave proporcionada.
+ * 
+ * @param type Indica el tipo de almacenamiento ("session" o "local")
+ * @param key Clave para identificar los datos a eliminar
+ */
+function borrarDeStorage(type: string = "session", key: string) {
+    if (type === "session") {
+        sessionStorage.removeItem(key);
+        console.log(`El dato con la clave "${key}" ha sido eliminado de Session Storage.`);
+    } else if (type === "local") {
+        localStorage.removeItem(key);
+        console.log(`El dato con la clave "${key}" ha sido eliminado de Local Storage.`);
+    } else {
+        console.error("El tipo debe ser 'session' o 'local'.");
+    }
+}
+
+// Ejemplo de cómo usar la función
+borrarDeStorage("session", "datos"); // Eliminar del Session Storage
+borrarDeStorage("local", "datos");   // Eliminar del Local Storage
+
+//Ejericio 7
+
+//a. Crear la cookie "nombre" que expira en 7 días y es accesible desde el path "/"
+Cookies.set('nombre', 'TuNombre', { expires: 7, path: '/' });
+console.log('Cookie "nombre" creada');
+
+// Crear la cookie "apellidos" que expira en 2 días
+Cookies.set('apellidos', 'TuApellido', { expires: 2 });
+console.log('Cookie "apellidos" creada');
+
+// Crear la cookie "email" que expira en 4 días
+Cookies.set('email', 'tuemail@ejemplo.com', { expires: 4 });
+console.log('Cookie "email" creada');
+
+// b. Recuperar las cookies y mostrarlas en la consola
+const nombre = Cookies.get('nombre');
+const apellidos = Cookies.get('apellidos');
+const email = Cookies.get('email');
+
+console.log('Cookie "nombre":', nomb);
+console.log('Cookie "apellidos":', apellidos);
+console.log('Cookie "email":', email);
+
+//c. Borrar las cookies "nombre", "apellidos" y "email"
+Cookies.remove('nombre', { path: '/' });  // Especificamos el path ya que la cookie fue creada con un path
+console.log('Cookie "nombre" eliminada');
+
+Cookies.remove('apellidos');
+console.log('Cookie "apellidos" eliminada');
+
+Cookies.remove('email');
+console.log('Cookie "email" eliminada');
+
