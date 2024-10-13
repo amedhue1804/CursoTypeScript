@@ -460,3 +460,25 @@ console.log('Cookie "apellidos" eliminada');
 Cookies.remove('email');
 console.log('Cookie "email" eliminada');
 
+// ACCESO A ELEMENTOS DOM
+let input = document.getElementById("input-contenido") as HTMLInputElement;
+let btnNuevoContenido = document.getElementsByClassName("btn-add-content")[0] as HTMLButtonElement;
+let elemenoOl = document.querySelector("#lista-contenidos") as HTMLOListElement;
+
+// EVENTO DEL BOTÓN
+btnNuevoContenido.addEventListener("click", (event) => {
+    /*Verificamos que haya texto en el input*/
+    if (input.value.trim() !== "") {
+        /*Crear un nuevo elemento <li>*/
+        let nuevoElemento = document.createElement("li");
+        nuevoElemento.innerText = input.value;  // Usar el texto del input
+
+        /* Añadir el nuevo elemento al final de la lista*/
+        elemenoOl.appendChild(nuevoElemento);
+
+        /*Limpiar el input después de añadir el contenido*/
+        input.value = "";
+    } else {
+        console.log("Por favor, introduzca un texto válido.");
+    }
+});
