@@ -463,10 +463,11 @@ console.log('Cookie "email" eliminada');
 // ACCESO A ELEMENTOS DOM
 let input = document.getElementById("input-contenido") as HTMLInputElement;
 let btnNuevoContenido = document.getElementsByClassName("btn-add-content")[0] as HTMLButtonElement;
+let btnEliminarContenido= document.getElementsByClassName("btn-remove-content")[0] as HTMLButtonElement;
 let elemenoOl = document.querySelector("#lista-contenidos") as HTMLOListElement;
 
-// EVENTO DEL BOTÓN
-btnNuevoContenido.addEventListener("click", (event) => {
+// EVENTO DEL BOTÓN AÑADIR
+btnNuevoContenido.addEventListener("click", (event:Event) => {
     /*Verificamos que haya texto en el input*/
     if (input.value.trim() !== "") {
         /*Crear un nuevo elemento <li>*/
@@ -480,5 +481,18 @@ btnNuevoContenido.addEventListener("click", (event) => {
         input.value = "";
     } else {
         console.log("Por favor, introduzca un texto válido.");
+    }
+});
+//ELEMENTO DEL BOTON ELIMINAR
+/* Para eliminar el boton necesitamos addEventListener porque estamos añadiendo una nueva accion
+*Intente hacerlo con removeEventListener y segun he visto no funciona para el ejercicio de borrar sino
+para borrar acciones de botones que se hayan instanciado
+*/ 
+btnEliminarContenido.addEventListener("click",(event:Event)=>{
+/* Aqui miramos si hay un ultimo elemento*/ 
+    if(elemenoOl.lastElementChild){
+        elemenoOl.removeChild(elemenoOl.lastElementChild);//Eliminamos el ultimo
+    }else{
+        console.log("No hay elementos que eliminar")
     }
 });
