@@ -1,3 +1,6 @@
+import Empleado from "./models/Empleado";
+import Persona from "./models/Persona";
+
 /*Instancio el tipo de datos que vamos a usar para obtener una imgPerro aleatoria*/
 type Perro = {
     message:string,
@@ -105,4 +108,13 @@ estrella.addEventListener("click",() =>{
         estrella.classList.add("bi-star-fill")
     }
 });
+
+
+
+
+/* OBJETOS */
+
+let persona:Persona = new Persona("Adrian", "Medina", 25);
+
+let empleado:Empleado = new Empleado("Antonio","Molina",4000,40)
 

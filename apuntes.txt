@@ -876,3 +876,6 @@ let ElementoStar:HTMLSpanElement = document.getElementbyID ("id que le pongamos"
 elementoStar.classList.remove ('bi-start')
 elemento.classList.toggle ('bi-start-fill')
 */
+
+/*Mirar las clases querySelector AND querySelectorAll para ESTUDIAR, es una forma de acceder a los hijos 
+de las clases que tienen contenido muy util porque simplifica codigo*/
