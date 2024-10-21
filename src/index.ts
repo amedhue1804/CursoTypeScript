@@ -65,12 +65,21 @@ btnEliminar.addEventListener("click", (evento:Event)=>{
 let estrella = document.getElementsByName("single-star")[0] as HTMLElement;
 /*Cuando pasamos el raton sobre la estrella, se rellena */
 estrella.addEventListener("mouseover", () => { 
-    estrella.classList.remove("bi-star");
-    estrella.classList.add("bi-star-fill");
+    if(!estrella.classList.contains("clickeada")){
+        //Si estaba clickeada, la vaciamos
+        estrella.classList.remove("clickeada");
+        estrella.classList.remove("bi-star");
+        estrella.classList.add("bi-star-fill")
+    }else{
+        //Si no lo estaba rellenamos y marcamos
+        estrella.classList.add("clickeada");
+        estrella.classList.remove("bi-star-fill");
+        estrella.classList.add("bi-star")
+    }
 });
 /*Cuando quitamos el raton de la estrella, se vacia si no ha clickado antes */ 
 estrella.addEventListener("mouseout",() =>{
-    if(estrella.classList.contains("clickeada")){
+    if(!estrella.classList.contains("clickeada")){
         //Si estaba clickeada, la vaciamos
         estrella.classList.remove("clickeada");
         estrella.classList.remove("bi-star-fill");
